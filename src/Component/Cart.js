@@ -50,7 +50,7 @@ const Cart = (props) => {
   const handleClose = () => {
     props.onHide();
   };
-  const products = cartElements.map((item) => {
+  
   let total = 0;
   let totalForItem = 0;
   let totalPrice = 0;
@@ -84,7 +84,6 @@ const Cart = (props) => {
             <hr />
             <Form>
               <InputGroup>
-                <Form.Control type="number" />
                 <Form.Control type="number" defaultValue={totalForItem} />
                 <Button variant="danger" className="float-end">
                   Remove
@@ -96,7 +95,7 @@ const Cart = (props) => {
       </>
     );
   });
-});
+
   return (
     <Modal {...props} className="custamiseModal">
       <Modal.Header closeButton>

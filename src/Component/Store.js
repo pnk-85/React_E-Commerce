@@ -72,7 +72,6 @@ const Store = () => {
 
           <Card.Text className="mt-5">
             ${item.price}
-            <Button className="float-end">ADD TO CART</Button>
             <Button className="float-end" onClick={() => addItem(item)}>
               ADD TO CART
             </Button>
