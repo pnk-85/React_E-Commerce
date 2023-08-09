@@ -1,5 +1,6 @@
 
-import React from "react";
+import React,{useContext} from "react";
+import CartContext from "../Store/CartContext";
 import "./Cart.css";
 import {
   Modal,
@@ -45,10 +46,18 @@ const cartElements = [
 ];
 
 const Cart = (props) => {
+  const cartCtx = useContext(CartContext);
   const handleClose = () => {
     props.onHide();
   };
   const products = cartElements.map((item) => {
+  let total = 0;
+  let totalForItem = 0;
+  let totalPrice = 0;
+  const products = cartCtx.items.map((item) => {
+    totalForItem = +item.amount;
+    total = total + +item.amount;
+    totalPrice = totalPrice + +item.price * totalForItem;
     return (
       <>
         <Row className="mb-4 mt-4">
@@ -63,12 +72,10 @@ const Cart = (props) => {
               }}
             />
           </Col>
-
           <Col sm={2}>
             <hr />
             {item.title}
           </Col>
-
           <Col sm={2}>
             <hr />
             {item.price}
@@ -78,6 +85,7 @@ const Cart = (props) => {
             <Form>
               <InputGroup>
                 <Form.Control type="number" />
+                <Form.Control type="number" defaultValue={totalForItem} />
                 <Button variant="danger" className="float-end">
                   Remove
                 </Button>
@@ -88,7 +96,7 @@ const Cart = (props) => {
       </>
     );
   });
-
+});
   return (
     <Modal {...props} className="custamiseModal">
       <Modal.Header closeButton>
@@ -96,7 +104,6 @@ const Cart = (props) => {
           <h4>Cart</h4>
         </Modal.Title>
       </Modal.Header>
-
       <Modal.Body>
         <Container>
           <Row>
@@ -115,6 +122,9 @@ const Cart = (props) => {
         <Container>{products}</Container>
       </Modal.Body>
       <Modal.Footer>
+        <Button bg="dark" size="lg" disabled variant="dark">
+          Total Amount : {totalPrice}
+        </Button>
         <Button
           variant="info"
           size="lg"
