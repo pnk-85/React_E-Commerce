@@ -1,24 +1,24 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import Store from './Component/Store';
+import Header from './Component/Header';
+import Cart from './Component/Cart';
 
 function App() {
+
+  const [modalShow, setModalShow] = useState(false);
+  const showModal = () => {
+    setModalShow(true);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <Header showModal={showModal} />
+    <Cart show={modalShow} onHide={() => setModalShow(false)} />
+
+    <Store />
+      
+    </>
   );
 }
 
