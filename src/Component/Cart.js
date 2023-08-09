@@ -1,9 +1,8 @@
 
-import React,{useContext} from "react";
+import { useContext } from "react";
 import CartContext from "../Store/CartContext";
 import "./Cart.css";
 import {
-  Modal,
   Button,
   Container,
   Row,
@@ -13,44 +12,43 @@ import {
   InputGroup,
 } from "react-bootstrap";
 
-const cartElements = [
-  {
-    title: "Colors",
+// const cartElements = [
+//   {
+//     title: "Colors",
 
-    price: 100,
+//     price: 100,
 
-    imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%201.png",
+//     imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%201.png",
 
-    quantity: 2,
-  },
+//     quantity: 2,
+//   },
 
-  {
-    title: "Black and white Colors",
+//   {
+//     title: "Black and white Colors",
 
-    price: 50,
+//     price: 50,
 
-    imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%202.png",
+//     imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%202.png",
 
-    quantity: 3,
-  },
+//     quantity: 3,
+//   },
 
-  {
-    title: "Yellow and Black Colors",
+//   {
+//     title: "Yellow and Black Colors",
 
-    price: 70,
+//     price: 70,
 
-    imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%203.png",
+//     imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%203.png",
 
-    quantity: 1,
-  },
-];
+//     quantity: 1,
+//   },
+// ];
 
 const Cart = (props) => {
   const cartCtx = useContext(CartContext);
   const handleClose = () => {
     props.onHide();
   };
-  
   let total = 0;
   let totalForItem = 0;
   let totalPrice = 0;
@@ -84,7 +82,7 @@ const Cart = (props) => {
             <hr />
             <Form>
               <InputGroup>
-                <Form.Control type="number" defaultValue={totalForItem} />
+                <Form.Control type="number" value={totalForItem} />
                 <Button variant="danger" className="float-end">
                   Remove
                 </Button>
@@ -97,43 +95,66 @@ const Cart = (props) => {
   });
 
   return (
-    <Modal {...props} className="custamiseModal">
-      <Modal.Header closeButton>
-        <Modal.Title className="mx-auto fw-b">
-          <h4>Cart</h4>
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <Container>
-          <Row>
-            <Col sm={5}>
-              {" "}
-              <h5>Item</h5>
-            </Col>
-            <Col sm={2}>
-              <h5>Price</h5>
-            </Col>
-            <Col sm={5}>
-              <h5>Product</h5>
-            </Col>
-          </Row>
-        </Container>
-        <Container>{products}</Container>
-      </Modal.Body>
-      <Modal.Footer>
-        <Button bg="dark" size="lg" disabled variant="dark">
+    <Container
+      style={{
+        backgroundColor: "white",
+        border: "solid 4px red",
+        borderRadius: "16px",
+      }}
+      className=" setCart "
+    >
+      <Container className="  mt-4">
+        <Row className="mb-4 ">
+          <Col sm={4}></Col>
+          <Col sm={4}>
+            <h2>Cart</h2>
+          </Col>
+          <Col sm={4}>
+            <Button
+              onClick={handleClose}
+              style={{ marginLeft: "95px" }}
+              variant="outline-danger"
+            >
+              Close
+            </Button>
+          </Col>
+        </Row>
+        <Row>
+          <Col sm={5}>
+            {" "}
+            <h4>Item</h4>
+          </Col>
+          <Col sm={2}>
+            <h4>Price</h4>
+          </Col>
+          <Col sm={5}>
+            <h4>Quantity</h4>
+          </Col>
+        </Row>
+      </Container>
+      <Container>{products}</Container>
+
+      <Container className="mb-3 ">
+        <Button
+          bg="dark"
+          size="lg"
+          style={{ marginLeft: "15%", marginBottom: "1px" }}
+          disabled
+          variant="dark"
+          //   className="border border-danger"
+        >
           Total Amount : {totalPrice}
         </Button>
         <Button
           variant="info"
           size="lg"
-          className="mx-auto"
+          style={{ marginLeft: "16px" }}
           onClick={handleClose}
         >
           Purchase
         </Button>
-      </Modal.Footer>
-    </Modal>
+      </Container>
+    </Container>
   );
 };
 
