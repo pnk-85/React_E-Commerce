@@ -5,6 +5,7 @@ import Store from './Component/Store';
 import CartProvider from './Store/CartProvider';
 import About from './Component/About';
 import RootLayout from './Component/Root';
+import Home from './Component/Home';
 
 
 const router = createBrowserRouter([
@@ -13,6 +14,8 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       { path: "/", element: <Store /> },
+      { path: "/", element: <Home /> },
+      { path: "/store", element: <Store /> },
       { path: "/about", element: <About /> },
     ],
   },
@@ -22,9 +25,12 @@ const router = createBrowserRouter([
 function App() {
 
   return (
+    <>
     <CartProvider>
       <RouterProvider router={router} />
     </CartProvider>
+    </>
+    
   );
 }
 

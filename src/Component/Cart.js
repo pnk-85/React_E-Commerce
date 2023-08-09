@@ -45,7 +45,9 @@ import {
 // ];
 
 const Cart = (props) => {
+
   const cartCtx = useContext(CartContext);
+
   const handleClose = () => {
     props.onHide();
   };
@@ -70,7 +72,7 @@ const Cart = (props) => {
               }}
             />
           </Col>
-          <Col sm={2}>
+          <Col sm={2} id="price" >
             <hr />
             {item.title}
           </Col>
@@ -82,7 +84,10 @@ const Cart = (props) => {
             <hr />
             <Form>
               <InputGroup>
-                <Form.Control type="number" value={totalForItem} />
+                <Form.Control 
+                id="quantity"
+                type="number"
+                 value={item.amount} />
                 <Button variant="danger" className="float-end">
                   Remove
                 </Button>
@@ -101,7 +106,7 @@ const Cart = (props) => {
         border: "solid 4px red",
         borderRadius: "16px",
       }}
-      className=" setCart "
+      className=" setCart shadow-lg "
     >
       <Container className="  mt-4">
         <Row className="mb-4 ">
