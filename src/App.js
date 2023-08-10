@@ -1,37 +1,43 @@
-import React from 'react';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import React,{useState} from 'react';
+import { Route } from 'react-router-dom';
 import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import ContactUS from './Component/ContactUs';
+import Header from'./Component/Header';
+import Cart from './Component/Cart';
+import Footer from './Component/Footer';
 import Store from './Component/Store';
-import CartProvider from './Store/CartProvider';
 import About from './Component/About';
-import RootLayout from './Component/Root';
 import Home from './Component/Home';
 
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <RootLayout />,
-    children: [
-      { path: "/", element: <Store /> },
-      { path: "/", element: <Home /> },
-      { path: "/store", element: <Store /> },
-      { path: "/about", element: <About /> },
-    ],
-  },
-]);
-
-
 function App() {
-
+  const [modalShow, setModalShow] = useState(false);
+  const showModal = () => {
+    setModalShow(true);
+  };
   return (
     <>
-    <CartProvider>
-      <RouterProvider router={router} />
-    </CartProvider>
+      <Header showModal={showModal} />
+      {!!modalShow && (
+        <Cart show={modalShow} onHide={() => setModalShow(false)} />
+      )}
+
+      <Route path="/home">
+        <Home />
+      </Route>
+      <Route path="/store">
+        <Store />
+      </Route>
+      <Route path="/about">
+        <About />
+      </Route>
+      <Route path="/contactus">
+        <ContactUS />
+      </Route>
+
+      <Footer />
     </>
-    
   );
 }
-
 export default App;
