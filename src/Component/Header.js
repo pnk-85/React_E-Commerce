@@ -48,7 +48,7 @@ const Header = (props) => {
                 {" "}
                 <h4>Store</h4>{" "}
                 </NavLink>
-              <NavLink to="/about" className="  text-decoration-none">
+              <NavLink to="/about" className="me-5  text-decoration-none">
                 {" "}
                 <h4>About </h4>
               </NavLink>

@@ -1,11 +1,15 @@
-import React,{ useContext} from "react";
+import React, { useContext } from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Card, Col, Row } from "react-bootstrap";
 import CartContext from "../Store/CartContext";
-import './Store.css';
+import "./Store.css";
+import { Link } from "react-router-dom/cjs/react-router-dom";
 
 const productsArr = [
   {
-    title: "Colors",
+    id: "p1",
+    
+    title: "Headphones",
 
     price: 100,
 
@@ -13,7 +17,9 @@ const productsArr = [
   },
 
   {
-    title: "Black and white Colors",
+    id: "p2",
+    
+    title: "iPhone",
 
     price: 50,
 
@@ -21,7 +27,9 @@ const productsArr = [
   },
 
   {
-    title: "Yellow and Black Colors",
+    id: "p3",
+    
+    title: "Refrigerator",
 
     price: 70,
 
@@ -29,7 +37,9 @@ const productsArr = [
   },
 
   {
-    title: "Blue Color",
+    id: "p4",
+    
+    title: "Horse Painting",
 
     price: 100,
 
@@ -38,12 +48,10 @@ const productsArr = [
 ];
 const Store = () => {
   const cartCtx = useContext(CartContext);
-
   const addItem = (item) => {
     cartCtx.addItem({ ...item, amount: 1 });
-    // console.log(item);
+    console.log(cartCtx.addItem);
   };
-
   const products = productsArr.map((item) => {
     return (
       <Col>
@@ -61,9 +69,16 @@ const Store = () => {
           >
             <h4>{item.title}</h4>
           </Card.Header>
-
           <Card.Body className="cardSet">
-            <Card.Img src={`${item.imageUrl}`} className=" cardImg " />
+           
+            <Link to={`/store/${item.id}`}>
+              <Card.Img
+                src={`images/1${item.id}.png`}
+                className=" cardImg "
+                style={{ height: "250px", width: "250px" }}
+                // onClick={() => imageClicked(item.id)}
+              />
+            </Link>
           </Card.Body>
 
           <Card.Text className="mt-5">
@@ -72,7 +87,6 @@ const Store = () => {
               ADD TO CART
             </Button>
           </Card.Text>
-
           {/* <Card.Img src=`${item.imageUrl}"/250px250"` alt="Card image" /> */}
         </Card>
       </Col>
@@ -86,5 +100,4 @@ const Store = () => {
     </>
   );
 };
-
 export default Store;

@@ -12,38 +12,6 @@ import {
   InputGroup,
 } from "react-bootstrap";
 
-// const cartElements = [
-//   {
-//     title: "Colors",
-
-//     price: 100,
-
-//     imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%201.png",
-
-//     quantity: 2,
-//   },
-
-//   {
-//     title: "Black and white Colors",
-
-//     price: 50,
-
-//     imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%202.png",
-
-//     quantity: 3,
-//   },
-
-//   {
-//     title: "Yellow and Black Colors",
-
-//     price: 70,
-
-//     imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%203.png",
-
-//     quantity: 1,
-//   },
-// ];
-
 const Cart = (props) => {
 
   const cartCtx = useContext(CartContext);
@@ -64,7 +32,7 @@ const Cart = (props) => {
           <Col sm={3}>
             <hr />
             <Image
-              src={`${item.imageUrl}`}
+              src={`images/1${item.id}.png`}
               className="mx-auto "
               style={{
                 height: "80px",
@@ -72,11 +40,11 @@ const Cart = (props) => {
               }}
             />
           </Col>
-          <Col sm={2} id="price" >
+          <Col sm={3}>
             <hr />
             {item.title}
           </Col>
-          <Col sm={2}>
+          <Col sm={1}  id="price" >
             <hr />
             {item.price}
           </Col>
