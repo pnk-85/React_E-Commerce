@@ -27,7 +27,7 @@ const Header = (props) => {
   };
 
   const showModal = () => {
-    console.log("showModal");
+    // console.log("showModal");
     props.showModal();
   };
   let total = cartCtx.items.reduce(

@@ -6,7 +6,7 @@ const CartProvider = (props) => {
 
   const addItemToCartHandler = (item) => {
 
-    console.log("item", item);
+    console.log(item);
 
     let existingItemIndex = items.findIndex((el) => el.id === item.id);
     let existingItem = items[existingItemIndex];
@@ -17,7 +17,7 @@ const CartProvider = (props) => {
         amount: +existingItem.amount + +item.amount,
       };
       updatedItems = [...items];
-      console.log("updatedItem", updatedItem);
+      
       updatedItems[existingItemIndex] = updatedItem;
     } else {
       const updatedItem = {
@@ -26,14 +26,35 @@ const CartProvider = (props) => {
       };
       updatedItems = items.concat(updatedItem);
     }
-    console.log("into context", item);
     setItems([...updatedItems]);
+    console.log("into context", item);
   };
-  const removeItemFromCartHandler = () => {};
+
+  const removeItemFromCartHandler = (id) => {
+    const newItems = items.filter((el) => id !== el.id);
+    setItems(newItems);
+  };
+  const removeOneItemHandler = (item) => {
+    const existingItemIndex = items.findIndex((el) => el.id === item.id);
+    const existingItem = items[existingItemIndex];
+    const newItem = { ...existingItem, amount: +existingItem.amount - 1 };
+    let updatedItems = [...items];
+    updatedItems[existingItemIndex] = newItem;
+    setItems(updatedItems);
+    // console.log(existingItem);
+  };
+
+  const addAllItemHandler = (items) => {
+    setItems(items);
+  }
+
   const cartContext = {
     items: items,
     addItem: addItemToCartHandler,
     removeItem: removeItemFromCartHandler,
+    removeOneItem : removeOneItemHandler,
+    addAllItem : addAllItemHandler
+
   };
   return (
     <CartContext.Provider value={cartContext}>

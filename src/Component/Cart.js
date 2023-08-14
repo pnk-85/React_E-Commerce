@@ -10,11 +10,22 @@ import {
   Image,
   Form,
   InputGroup,
+  ButtonGroup
 } from "react-bootstrap";
 
 const Cart = (props) => {
 
   const cartCtx = useContext(CartContext);
+
+  const removeOneItem = (item) => {
+    cartCtx.removeOneItem(item);
+  };
+  const addOneItem = (item) => {
+    cartCtx.addItem({ ...item, amount: 1 });
+  };
+  const removeItem = (id) => {
+    cartCtx.removeItem(id);
+  };
 
   const handleClose = () => {
     props.onHide();
@@ -24,6 +35,11 @@ const Cart = (props) => {
   let totalPrice = 0;
   const products = cartCtx.items.map((item) => {
     totalForItem = +item.amount;
+
+    if(totalForItem < 1){
+      return;
+    }
+
     total = total + +item.amount;
     totalPrice = totalPrice + +item.price * totalForItem;
     return (
@@ -48,17 +64,43 @@ const Cart = (props) => {
             <hr />
             {item.price}
           </Col>
-          <Col sm={5}>
+          <Col sm={6}>
             <hr />
             <Form>
               <InputGroup>
                 <Form.Control 
                 id="quantity"
+                style={{
+                  height: "40px",
+                  marginRight: "13px",
+                  borderRadius: "16px",
+                }}
                 type="number"
                  value={item.amount} />
-                <Button variant="danger" className="float-end">
-                  Remove
-                </Button>
+                 
+                <ButtonGroup className="mb-2">
+                  <Button
+                    className="rounded-end"
+                    variant="outline-danger"
+                    onClick={() => removeOneItem(item)}
+                  >
+                    -
+                  </Button>
+                  <Button
+                    className="mx-2 rounded-1"
+                    variant="success"
+                    onClick={() => addOneItem(item)}
+                  >
+                    +
+                  </Button>
+                  <Button
+                    className="rounded-start"
+                    variant="danger"
+                    onClick={() => removeItem(item.id)}
+                  >
+                    Remove
+                  </Button>
+                </ButtonGroup>
               </InputGroup>
             </Form>
           </Col>
