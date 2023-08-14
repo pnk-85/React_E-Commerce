@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import CartContext from "../Store/CartContext";
+import AuthContext from "../Store/auth-context";
 import './Header.css';
 
 import {
@@ -17,6 +18,14 @@ import {
 
 const Header = (props) => {
   const cartCtx = useContext(CartContext);
+
+  const authCtx = useContext(AuthContext);
+  const isLogin = authCtx.isLoggedIn;
+  const logoutHandler = () => {
+    authCtx.logout();
+    localStorage.removeItem("token");
+  };
+
   const showModal = () => {
     console.log("showModal");
     props.showModal();
@@ -52,16 +61,37 @@ const Header = (props) => {
                 {" "}
                 <h4>About </h4>
               </NavLink>
+              {!isLogin && (
+                <NavLink to="/login" className="me-5  text-decoration-none">
+                  {" "}
+                  <h4>Login </h4>
+                </NavLink>
+              )}
               <NavLink to="/contactus" className="  text-decoration-none">
                 {" "}
                 <h4>Contact us </h4>
               </NavLink>
             </Nav>
           </Col>
-          <Col sm={1}>
-            <Button variant="outline-info" onClick={() => showModal()}>
-              Cart <Badge bg="primary">{total}</Badge>
-            </Button>
+          <Col sm={2}>
+            {isLogin && (
+              <Button
+                variant="info"
+                className="me-2 fw-bold"
+                onClick={logoutHandler}
+              >
+                Logout
+              </Button>
+            )}
+            {isLogin && (
+              <Button
+                className="fw-bold"
+                variant="outline-info"
+                onClick={() => showModal()}
+              >
+                Cart <Badge bg="primary">{total}</Badge>
+              </Button>
+            )}
           </Col>
         </Container>
       </Navbar>

@@ -2,15 +2,16 @@ import React,{useState} from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import './App.css';
 import "bootstrap/dist/css/bootstrap.min.css";
-import ContactUS from './Component/ContactUs';
+import ContactUS from './Pages/ContactUs';
 import Header from'./Component/Header';
 import Cart from './Component/Cart';
 import Footer from './Component/Footer';
-import Store from './Component/Store';
-import About from './Component/About';
-import Home from './Component/Home';
+import Store from './Pages/Store';
+import About from './Pages/About';
+import Home from './Pages/Home';
 import CartProvider from './Store/CartProvider';
 import SingleProduct from './Component/SingleProduct';
+import RegistrationPage from './Pages/RegistrationPage';
 
 
 function App() {
@@ -47,6 +48,10 @@ function App() {
       </Route>
       <Route path="/contactus">
         <ContactUS />
+      </Route>
+
+      <Route path='/login'>
+        <RegistrationPage />
       </Route>
 
       <Footer />
