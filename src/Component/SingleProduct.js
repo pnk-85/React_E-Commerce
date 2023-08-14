@@ -29,7 +29,7 @@ const SingleProduct = () => {
         style={{ marginLeft: "40%", marginTop: "10px", marginBottom: "50px" }}
       >
         <Badge bg="transparent" className="fw-bold text-center" text="dark">
-          Price: ₹{products.price}.00
+          Price: ${products.price}.00
         </Badge>
       </h3>
       <Container>

@@ -45,10 +45,10 @@ const Cart = (props) => {
     return (
       <>
         <Row className="mb-4 mt-4">
-          <Col sm={3}>
+          <Col sm={2}>
             <hr />
             <Image
-              src={`images/1${item.id}.png`}
+              src={`${item.imageUrl}`}
               className="mx-auto "
               style={{
                 height: "80px",
@@ -64,7 +64,7 @@ const Cart = (props) => {
             <hr />
             {item.price}
           </Col>
-          <Col sm={6}>
+          <Col sm={3}>
             <hr />
             <Form>
               <InputGroup>

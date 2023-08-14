@@ -1,23 +1,29 @@
-import React, { useContext, useRef, useState, useEffect } from "react";
-
+import React, { useContext, useState, useRef, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button, Card, Col, Row, Form, FloatingLabel, InputGroup } from "react-bootstrap";
- import { productsArr1 } from "../Component/ProductArr";
+import { productsArr1 } from "../Component/ProductArr";
+import {
+  Button,
+  Card,
+  Col,
+  Row,
+  Form,
+  FloatingLabel,
+  InputGroup,
+} from "react-bootstrap";
 import CartContext from "../Store/CartContext";
 import "./Store.css";
 import { Link } from "react-router-dom/cjs/react-router-dom";
 
-
+// const productsArr = productsArr;
 const Store = () => {
   const quantityRef = useRef("");
   // const [importItem, setImportItem] = useState([]);
   const [quantity, setQuantity] = useState(1);
   const cartCtx = useContext(CartContext);
-
   const [cartItems, setCartItems] = useState([...cartCtx.items]);
   const emailRegEx = localStorage.getItem("email");
 
-  let url = `https://crudcrud.com/api/8b9fa521685b4e87b94e06d596cf411a`;
+  let url = `https://crudcrud.com/api/e80f1151adc3458db20fea8c3ebb8fbb`;
   useEffect(() => {
     fetch(`${url}/cart${emailRegEx}`)
       .then((res) => res.json())
@@ -40,7 +46,6 @@ const Store = () => {
     console.log(cartCtx.items);
   };
   const addItem = (item) => {
-  
     for (const el of cartCtx.items) {
       if (el.id === item.id) {
         return alert("You have added this Item to cart");
@@ -65,10 +70,8 @@ const Store = () => {
     });
     setQuantity(1);
   };
-
   const products = productsArr1.map((item) => {
     return (
-      
       <Col key={Math.random().toString()}>
         <Card
           style={{ width: "310px", border: "none" }}
@@ -87,7 +90,7 @@ const Store = () => {
           <Card.Body className="cardSet">
             <Link to={`/store/${item.id}`}>
               <Card.Img
-                src={`images/1${item.id}.png`}
+                src={`${item.imageUrl}`}
                 className=" cardImg "
                 style={{ height: "250px", width: "250px" }}
                 // onClick={() => imageClicked(item.id)}
@@ -97,7 +100,7 @@ const Store = () => {
 
           <Card.Text className="my-auto">
             <InputGroup>
-              <InputGroup.Text>₹{item.price}.00 </InputGroup.Text>
+              <InputGroup.Text>${item.price}.00 </InputGroup.Text>
 
               <FloatingLabel
                 style={{ width: "60px" }}
@@ -141,4 +144,5 @@ const Store = () => {
     </>
   );
 };
+
 export default Store;
